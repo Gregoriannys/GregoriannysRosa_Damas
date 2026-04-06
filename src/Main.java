@@ -5,20 +5,30 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    @Override
-    public void start(Stage stage) throws Exception{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
-        Scene scene = new Scene(loader.load(), 800, 600);
+    private static Stage ventana;
 
-        stage.setTitle("Juego de Damas");
-        stage.setScene(scene);
-        stage.show();
+    @Override
+    public void start(Stage primaryStage ) throws Exception {
+        ventana = primaryStage;
+        mostarMenu();
+        ventana.setTitle("juego de Damas");
+        ventana.show();
     }
 
-    public static void main(String[] args){
+    public static void mostarMenu() throws Exception {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("menu.fxml"));
+        Scene scene = new Scene(loader.load(), 800, 600);
+        ventana.setScene(scene);
+    }
+
+    public static void mostarJuego() throws Exception {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("juego.fxml"));
+        Scene scene = new Scene(loader.load(), 1000, 700);
+        ventana.setScene(scene);
+    }
+
+    public static void main(String[] args) {
         launch(args);
     }
 
-
-    
 }

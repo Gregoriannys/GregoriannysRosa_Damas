@@ -4,7 +4,11 @@ public class MenuController {
 
     @FXML
     private void iniciarJuego(){
-        System.out.println("Iniciar juego...");
+        try{
+            Main.mostarJuego();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
