@@ -24,9 +24,7 @@ public class ControladorJuego {
 
     public void seleccionar(int fila, int col) {
 
-        //if (tablero.esFinDeJuego())
-           // return;
-
+      
         Ficha ficha = tablero.getFicha(fila, col);
 
         if (filaSeleccionada != -1) {
