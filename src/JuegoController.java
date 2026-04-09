@@ -19,7 +19,8 @@ public class JuegoController {
 
     private final int SIZE = 70;
 
-    
+    private ControladorJuego controlador = new ControladorJuego();
+
     @FXML
     public void initialize() {
 
@@ -37,37 +38,77 @@ public class JuegoController {
             gridTablero.getRowConstraints().add(row);
         }
 
-        dibujarTablero();
+        actualizarUI();
     }
 
-    private void dibujarTablero() {
+    private void dibujar() {
         gridTablero.getChildren().clear();
+
+        Tablero t = controlador.getTablero();
 
         for (int f = 0; f < 8; f++) {
             for (int c = 0; c < 8; c++) {
 
                 Rectangle rect = new Rectangle(SIZE, SIZE);
-
                 boolean oscura = (f + c) % 2 != 0;
                 rect.setFill(oscura ? Color.web("#2e7d32") : Color.web("#a5d6a7"));
 
                 StackPane celda = new StackPane(rect);
 
+                // Para resaltar la seleccion
+                if (f == controlador.getFilaSeleccionada() &&
+                        c == controlador.getColSeleccionada()) {
+                    rect.setStroke(Color.RED);
+                    rect.setStrokeWidth(3);
+                }
+
+                // Para los movimientos validos
+                for (Tablero.Movimiento m : controlador.getMovimientosSeleccionados()) {
+                    if (m.filaDestino == f && m.colDestino == c) {
+                        rect.setFill(Color.LIGHTGREEN);
+                    }
+                }
+
+                // Para dibujar las fichas
+                Ficha ficha = t.getFicha(f, c);
+                if (ficha != null) {
+                    javafx.scene.shape.Circle pieza = new javafx.scene.shape.Circle(SIZE * 0.35);
+
+                    if (ficha.getColor() == Ficha.ColorFicha.BLANCA)
+                        pieza.setFill(Color.WHITE);
+                    else
+                        pieza.setFill(Color.BLACK);
+
+                    celda.getChildren().add(pieza);
+
+                }
+
+                int fila = f;
+                int col = c;
+
+                celda.setOnMouseClicked(e -> {
+                    controlador.seleccionar(fila, col);
+                    actualizarUI();
+                });
+
                 gridTablero.add(celda, c, f);
 
             }
         }
+
     }
 
-    private void actualizarUI(){
-        lblTurno.setText("Turno:  jugador 1 ");
+    private void actualizarUI() {
+        lblTurno.setText("Turno: " + controlador.getTurnoActual());
+        dibujar();
+
     }
 
     @FXML
     private void reiniciarJuego() {
-       lblGanador.setText("Ganador:");
-       lblTurno.setText("Turno : jugador 1" );
-
+        controlador.reiniciar();
+        lblGanador.setText("Ganador:");
+        actualizarUI();
     }
 
     @FXML

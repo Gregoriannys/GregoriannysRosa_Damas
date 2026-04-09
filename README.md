@@ -5,8 +5,7 @@ Proyecto final, programacion3, juego damas.
 
 ## 1. Descripción del proyecto
 Este proyecto consiste en el desarrollo de un juego de damas para dos jugadores en una misma maquina.  
-Para este segundo avence, se ha implementado la interfaz grafica del juego utilizando javaFX y Scene builder, incluyendo el tablero visual (8x8) y la navegacion desde el menu principal hacia la pantalla de juego.
----
+Para este tercer avence, se ha implementado la logica principal del juego, permitiendo la interaccion entre el usuario y el tablero, asi como el movimiento de las fichas de acuerdo con las reglas basicas.
 
 ## 2. Funcionalidades implementadas
 - Estructura basica del proyecto en JavaFX
@@ -20,6 +19,16 @@ Para este segundo avence, se ha implementado la interfaz grafica del juego utili
 - Panel lateral con informacion (turno y ganador)
 - Botones de reinicio y regreso al menu (funcionales a nivel visual)
 
+- Inicializacion del tablero con las fichas en su posicion correcta
+- Seleccion de fichas mediante clic
+- Movimiento de fichas en diagonal
+- Validacion de movimientos permitidos
+- Captura basica de fichas enemigas
+- Resaltado visual de: 
+   - Ficha seleccionada
+   - Movimientos validos disponibles
+
+
 ---
 
 ## 3. Requisitos previos
@@ -27,7 +36,7 @@ Para ejecutar este proyecto es necesario contar con:
 
 - Java JDK 17 o superior
 - JavaFX SDK
-- IDE recomendado: IntelliJ IDEA o NetBeans
+- IDE recomendado: Visual Studio Code(con Extension Pack for java), IntelliJ IDEA o NetBeans.
 
 ---
 
@@ -44,9 +53,9 @@ Para ejecutar este proyecto es necesario contar con:
 - `Main.java`: Clase principal que gestiona las escenas(menu y juego)
 - `MenuController.java`: Controlador del menu principal
 - `JuegoController.java`: Controlador de la interfazdel juego
-- `ControladorJuego.java`: Controlador del juego (estructura inicial, sin logica aun)
-- `Tablero.java`: Representa el tablero (estructura inicial)
-- `Ficha.java`: Representa una ficha (estructura inicial)
+- `ControladorJuego.java`: Controla la logica del juego(seleccion, movimiento y turnos)
+- `Tablero.java`: Maneja el estado del tablero y movimientos validos 
+- `Ficha.java`: Representa una ficha del juego
 - `menu.fxml`: Interfaz grafica del menu
 - `juego.fxml`: Interfaz grafica del juego (tablero y panel lateral)
 ---
@@ -61,9 +70,11 @@ Este patron permite separar:
 - Modelo: clases como tablero y ficha (logica del juego)
 - Vista: archivos FXML (interfaz grafica)
 - Controlador: clases como juegoController y MenuController (interaccion).
+
+En este commit, la logica implementada se enfoca unicamente en el funcionamiento del juego, dejando las validaciones avanzadas y el manejo de estados finales para el siguiente avance.
 ---
 
 ## 7. Autor
 
 Nombre: [Gregoriannys Rosa Riveras]  
-Fecha: [6/4/2026]
+Fecha: [9/4/2026]
