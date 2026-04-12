@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JuegoController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #051a05;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JuegoController">
    <center>
-      <GridPane fx:id="gridTablero" maxHeight="-Infinity" maxWidth="-Infinity" BorderPane.alignment="CENTER">
+      <GridPane fx:id="gridTablero" maxHeight="-Infinity" maxWidth="-Infinity" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 20, 0, 0, 10);" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -25,16 +25,16 @@
       </GridPane>
    </center>
    <right>
-      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="236.0" spacing="20.0" style="-fx-background-color: #f4f4f4; -fx-border-color: #cccccc; -fx-border-width: 0 0 0 1;" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="236.0" spacing="20.0" style="-fx-background-color: rgba(255, 255, 255, 0.05); -fx-border-color: #cccccc; -fx-border-width: 0 0 0 1;" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="lblTurno" alignment="CENTER" contentDisplay="TOP" prefHeight="22.0" prefWidth="48.0" style="-fx-font-size: 12; -fx-font-style: bold;" text="Turno">
+            <Label fx:id="lblTurno" alignment="CENTER" contentDisplay="TOP" prefHeight="22.0" prefWidth="250.0" style="-fx-font-size: 18; -fx-font-style: bold; -fx-text-fill: #eaffea; -fx-font-weight: bold; -fx-effect: dropshadow(three-pass-box, #2ecc71, 10, 0.5, 0, 0);" text="Turno">
                <font>
-                  <Font name="System Bold" size="12.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="lblGanador" alignment="CENTER" text="Ganador:" />
-            <Button mnemonicParsing="false" onAction="#reiniciarJuego" text="Reiniciar" />
-            <Button mnemonicParsing="false" onAction="#volverMenu" text="Volver" />
+            <Label fx:id="lblGanador" alignment="CENTER" prefWidth="250.0" style="-fx-text-fill: #eaffea; -fx-font-weight: bold; -fx-effect: dropshadow(three-pass-box, #2ecc71, 10, 0.5, 0, 0); -fx-font-size: 15;" text="Ganador:" />
+            <Button mnemonicParsing="false" onAction="#reiniciarJuego" style="-fx-background-color: transparent; -fx-border-color: #2ecc71; -fx-border-width: 2; -fx-border-radius: 5; -fx-text-fill: #2ecc71; -fx-font-weight: bold; -fx-cursor: hand; -fx-effect: dropshadow(three-pass-box, rgba(46, 204, 113, 0.6), 8, 0, 0, 0);" text="Reiniciar" />
+            <Button mnemonicParsing="false" onAction="#volverMenu" style="-fx-background-color: transparent; -fx-border-color: #e74c3c; -fx-border-width: 2; -fx-background-radius: 5; -fx-text-fill: #e74c3c; -fx-font-weight: bold; -fx-cursor: hand; -fx-effect: dropshadow(three-pass-box, rgba(231, 76, 60, 0.6), 8, 0, 0, 0);" text="Volver" />
          </children>
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

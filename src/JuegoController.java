@@ -6,6 +6,8 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.animation.TranslateTransition;
+import javafx.util.Duration;
 
 public class JuegoController {
 
@@ -79,6 +81,7 @@ public class JuegoController {
                     else
                         pieza.setFill(Color.BLACK);
 
+
                     celda.getChildren().add(pieza);
 
                 }
@@ -87,8 +90,21 @@ public class JuegoController {
                 int col = c;
 
                 celda.setOnMouseClicked(e -> {
+
+                    int filaOrigen = controlador.getFilaSeleccionada();
+                    int colOrigen = controlador.getColSeleccionada();
+
+                    // Intentar mover
                     controlador.seleccionar(fila, col);
-                    actualizarUI();
+
+                    // Si hubo movimiento valido
+                    if (filaOrigen != -1 && controlador.getFilaSeleccionada() == -1) {
+
+                        animarMovimiento(filaOrigen, colOrigen, fila, col);
+
+                    } else {
+                        actualizarUI();
+                    }
                 });
 
                 gridTablero.add(celda, c, f);
@@ -100,9 +116,52 @@ public class JuegoController {
 
     private void actualizarUI() {
         lblTurno.setText("Turno: " + controlador.getTurnoActual());
+
+        if (controlador.getTablero().finalDelJuego()) {
+            String ganador = controlador.getTablero().obtenerGanador();
+            lblGanador.setText("GANADOR: " + ganador);
+            lblGanador.setTextFill(javafx.scene.paint.Color.GOLD);
+            lblTurno.setText("JUEGO TERMINADO!");
+
+        } else {
+            lblGanador.setText("Ganador en curso...");
+            lblGanador.setTextFill(javafx.scene.paint.Color.BLACK);
+        }
         dibujar();
 
     }
+
+    private void animarMovimiento(int filaOrigen, int colOrigen, int filaDestino, int colDestino) {
+
+    
+    StackPane celdaOrigen = null;
+
+    for (javafx.scene.Node node : gridTablero.getChildren()) {
+        if (GridPane.getRowIndex(node) == filaOrigen &&
+            GridPane.getColumnIndex(node) == colOrigen) {
+            celdaOrigen = (StackPane) node;
+            break;
+        }
+    }
+
+    if (celdaOrigen == null || celdaOrigen.getChildren().size() < 2) {
+        actualizarUI();
+        return;
+    }
+
+    javafx.scene.Node ficha = celdaOrigen.getChildren().get(1);
+
+    TranslateTransition tt = new TranslateTransition(Duration.millis(250), ficha);
+
+    tt.setByX((colDestino - colOrigen) * SIZE);
+    tt.setByY((filaDestino - filaOrigen) * SIZE);
+
+    tt.setOnFinished(e -> {
+        actualizarUI(); 
+    });
+
+    tt.play();
+}
 
     @FXML
     private void reiniciarJuego() {

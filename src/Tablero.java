@@ -162,4 +162,66 @@ public class Tablero {
         }
     }
 
+
+    public boolean tieneMovimiento(Ficha.ColorFicha color){
+       for (int f = 0; f < 8; f++){
+        for(int c = 0; c < 8; c++){
+            Ficha ficha = getFicha(f, c);
+
+            if( ficha != null && ficha.getColor() == color){
+                if (!obtenerMovimientosValidosDesde(f, c).isEmpty()){
+                    return true;
+                }
+            }
+        }
+       }
+        return false;
+    }
+
+    public int contarFichas(Ficha.ColorFicha color){
+        int contador = 0;
+
+        for (int f = 0; f < 8; f++){
+            for (int c = 0; c < 8; c++){
+                Ficha ficha = getFicha(f, c);
+
+                if (ficha != null && ficha.getColor() == color){
+                    contador++;
+                }
+            }
+        }
+
+        return contador;
+    }
+
+    public boolean finalDelJuego(){
+        boolean blancas = contarFichas(Ficha.ColorFicha.BLANCA) > 0
+        && tieneMovimiento(Ficha.ColorFicha.BLANCA);
+
+        boolean negras = contarFichas(Ficha.ColorFicha.NEGRA) > 0
+         && tieneMovimiento(Ficha.ColorFicha.NEGRA);
+
+         finDeJuego = !(blancas && negras);
+         return finDeJuego;
+    }
+  
+
+    public String obtenerGanador(){
+        if (!finalDelJuego()) return null;
+
+        int blancas = contarFichas(Ficha.ColorFicha.BLANCA);
+        int negras = contarFichas(Ficha.ColorFicha.NEGRA);
+
+        if (blancas == 0) return "Negras";
+        if (negras == 0) return "Blancas";
+
+        boolean blancasMod = tieneMovimiento(Ficha.ColorFicha.BLANCA);
+        boolean negrasMod = tieneMovimiento(Ficha.ColorFicha.NEGRA);
+
+        if (!blancasMod && negrasMod) return "Negras";
+        if (!negrasMod && blancasMod) return "Blancas";
+
+        return "Empate";
+    }
+
 }

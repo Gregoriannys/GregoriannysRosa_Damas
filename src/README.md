@@ -2,7 +2,7 @@
 
 ## 1. Descripción del proyecto
 Este proyecto consiste en el desarrollo de un juego de damas para dos jugadores en una misma maquina.  
-Para este tercer avence, se ha implementado la logica principal del juego, permitiendo la interaccion entre el usuario y el tablero, asi como el movimiento de las fichas de acuerdo con las reglas basicas.
+Para este cuarto avence, se han completado las reglas logicas avanzadas, se ha implementado la deteccion de victoria y se realizo una mejora a lo que es su interfaz grafica con un estilo visual tipoNeon, ademas de incorporar animaciones que mejoran significativamente la experiencia del usuario.
 
 ## 2. Funcionalidades implementadas
 - Estructura basica del proyecto en JavaFX
@@ -25,6 +25,23 @@ Para este tercer avence, se ha implementado la logica principal del juego, permi
    - Ficha seleccionada
    - Movimientos validos disponibles
 
+- Captura multiple: implementacion en `ControladorJuego`. Si una ficha captura y puede seguir capturando, el turno se mantiene y se bloquea la seleccion a esa pieza.
+- Deteccion de fin de juego: Metodos logicos en la clase Tablero para determinar el ganador:
+
+- contarFichas: Seguimiento en tiempo real de las piezas restantes.
+
+- tieneMovimientos: Verificación de bloqueo (si un jugador no tiene movimientos válidos, pierde).
+
+- finalDelJuego y obtenerGanador: Validación automática del estado de la partida.
+
+- Actualización Dinámica de UI: El sistema ahora detecta el ganador y lo muestra con un resaltado especial (color Oro) en la interfaz.
+
+- Animación de movimiento de fichas:
+- Las piezas se desplazan suavemente entre casillas en lugar de cambiar instantáneamente
+- Implementado con TranslateTransition de JavaFX
+- Mejora en la interacción:
+   - Sensación más fluida y natural al jugar
+  - Mayor realismo visual en cada movimiento
 
 ---
 
@@ -50,28 +67,35 @@ Para ejecutar este proyecto es necesario contar con:
 - `Main.java`: Clase principal que gestiona las escenas(menu y juego)
 - `MenuController.java`: Controlador del menu principal
 - `JuegoController.java`: Controlador de la interfazdel juego
-- `ControladorJuego.java`: Controla la logica del juego(seleccion, movimiento y turnos)
+- `ControladorJuego.java`: Controla la logica de turnos y el control de capturas multiples.
 - `Tablero.java`: Maneja el estado del tablero y movimientos validos 
-- `Ficha.java`: Representa una ficha del juego
+- `Ficha.java`: Define las propiedades de las piezas (Blanco/Negro).
 - `menu.fxml`: Interfaz grafica del menu
-- `juego.fxml`: Interfaz grafica del juego (tablero y panel lateral)
+- `juego.fxml`: Interfaz grafica del juego (tablero y panel lateral), creados mediante Scene builder.
 ---
 
 
 
 ## 6. Decisiones de diseño
 
-Decidi utilizar JavaFX junto con Scene Builder para la construcción de la interfaz grafica, aplicando el patron de diseño MVC (Modelo-Vista-Controlador).  
+Decidi utilizar JavaFX junto con Scene Builder para la construcci0n de la interfaz grafica, aplicando el patron de diseño MVC (Modelo-Vista-Controlador).  
 
 Este patron permite separar: 
 - Modelo: clases como tablero y ficha (logica del juego)
 - Vista: archivos FXML (interfaz grafica)
 - Controlador: clases como juegoController y MenuController (interaccion).
 
-En este commit, la logica implementada se enfoca unicamente en el funcionamiento del juego, dejando las validaciones avanzadas y el manejo de estados finales para el siguiente avance.
+- se ha profundizado en la experiencia visual y la robustez de la logica:
+
+- Identidad Visual: Se abandonaron los  colores planos por un estilo Neon para darle un aspecto mas cercano a un videojuego moderno.
+
+- Interactividad: El uso de transiciones de opacidad al iniciar el menu busca que la aplicación no se sienta estatica.
+
+- Fluidez del Juego: Las animaciones de movimiento aportan continuidad visual, evitando cambios bruscos en el tablero.
 ---
 
 ## 7. Autor
 
 Nombre: [Gregoriannys Rosa Riveras]  
-Fecha: [9/4/2026]
+Fecha: [11/4/2026]
+
