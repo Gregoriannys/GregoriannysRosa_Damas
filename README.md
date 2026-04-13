@@ -1,52 +1,89 @@
 # GregoriannysRosa_Damas
-Proyecto final, programacion3, juego damas.
+- Proyecto final, programacion3, juego damas.
 
 
 # Juego de Damas
 
 ## 1. Descripción del proyecto
-Este proyecto consiste en el desarrollo de un juego de damas para dos jugadores en una misma maquina.  
-Para este cuarto avence, se han completado las reglas logicas avanzadas, se ha implementado la deteccion de victoria y se realizo una mejora a lo que es su interfaz grafica con un estilo visual tipoNeon, ademas de incorporar animaciones que mejoran significativamente la experiencia del usuario.
+Este proyecto consiste en el desarrollo de un juego de damas para dos jugadores en una misma maquina. El juego se ejecuta mediante una interfaz grafica desarrollada en JavaFX, permitiendo a los usuarios interactuar con el tablero a traves de clics para seleccionar y mover las fichas. 
+
+- Funcionamiento y reglas principales:
+- Cada jugador controla un conjunto de fichas (blancas y negras)
+- Las fichas se mueven en diagonal sobre casillas oscuras
+- Se pueden capturar fichas enemigas saltando sobre ellas
+- Si una ficha llega al extremo opuesto del tablero, se convierte en dama (reina)
+- Las damas pueden moverse en más direcciones que las fichas normales
+- El juego termina cuando un jugador se queda sin fichas o sin movimientos válidos
+
+- En esta version final del proyecto, se han implementado tanto las reglas completas del juego como mejoras visuales y animaciones que hacen la experiencia mas dinamica e intuitiva para el usuario.
+
 
 ## 2. Funcionalidades implementadas
-- Estructura basica del proyecto en JavaFX
-- Ventana principal funcional
-- Menu inicial con botones:
-  - Iniciar juego
-  - Salir
-- Navegacion entre pantallas(menu-juego)
-- Interfaz grafica del juego creada con Scene builder
-- Tablero visual de 8x8 generado dinamicamente con GridPane
-- Panel lateral con informacion (turno y ganador)
-- Botones de reinicio y regreso al menu (funcionales a nivel visual)
 
-- Inicializacion del tablero con las fichas en su posicion correcta
-- Seleccion de fichas mediante clic
-- Movimiento de fichas en diagonal
-- Validacion de movimientos permitidos
-- Captura basica de fichas enemigas
-- Resaltado visual de: 
-   - Ficha seleccionada
-   - Movimientos validos disponibles
+### Base del sistema
+- Estructura basica del proyecto en JavaFX  
+- Ventana principal funcional  
+- Menu inicial con opciones:
+  - Iniciar juego  
+  - Salir  
+- Navegacion entre pantallas (menu-juego)  
+- Interfaz grafica construida con Scene Builder  
+- Tablero dinamico de 8x8 usando GridPane  
+- Panel lateral con informacion (turno y ganador)  
+- Botones de reinicio y regreso al menu 
 
-- Captura multiple: implementacion en `ControladorJuego`. Si una ficha captura y puede seguir capturando, el turno se mantiene y se bloquea la seleccion a esa pieza.
-- Deteccion de fin de juego: Metodos logicos en la clase Tablero para determinar el ganador:
+---
 
-- contarFichas: Seguimiento en tiempo real de las piezas restantes.
+### Logica del juego
+- Inicializacion del tablero con fichas en posiciones correctas  
+- Seleccion de fichas mediante clic  
+- Movimiento diagonal de fichas  
+- Validacion de movimientos permitidos  
+- Captura basica de fichas enemigas  
+- Resaltado visual de:
+  - Ficha seleccionada  
+  - Movimientos validos disponibles  
 
-- tieneMovimientos: Verificación de bloqueo (si un jugador no tiene movimientos válidos, pierde).
+---
 
-- finalDelJuego y obtenerGanador: Validación automática del estado de la partida.
+### Reglas implementadas
+- Captura multiple:
+  - Implementada en ControladorJuego  
+  - Si una ficha puede seguir capturando, el turno no cambia  
 
-- Actualización Dinámica de UI: El sistema ahora detecta el ganador y lo muestra con un resaltado especial (color Oro) en la interfaz.
+- Deteccion de fin de juego:
+  - contarFichas: seguimiento de piezas restantes  
+  - tieneMovimientos: verifica si un jugador esta bloqueado  
+  - esFinDeJuego: determina si la partida termino  
+  - obtenerGanador: define el ganador automaticamente  
 
-- Animación de movimiento de fichas:
-- Las piezas se desplazan suavemente entre casillas en lugar de cambiar instantáneamente
-- Implementado con TranslateTransition de JavaFX
-- Mejora en la interacción:
-   - Sensación más fluida y natural al jugar
-  - Mayor realismo visual en cada movimiento
+- Actualizacion dinamica de la interfaz:
+  - El sistema detecta el ganador y lo muestra en pantalla con resaltado especial  
 
+---
+
+### Animaciones 
+- Movimiento animado de fichas utilizando TranslateTransition  
+- Transiciones suaves entre casillas (evita cambios bruscos)  
+- Mejora notable en la fluidez del juego  
+- Experiencia visual mas natural y dinamica  
+
+
+---
+
+### Sistema de Damas (Reinas) 
+- Coronación automatica:
+  - Ficha blanca se convierte en dama al llegar a la fila 0  
+  - Ficha negra se convierte en dama al llegar a la fila 7  
+
+- Diferenciacion visual:
+  - Representadas con un circulo interno dorado  
+  - Borde resaltado para distinguirlas de las fichas normales  
+  - Permite identificar facilmente piezas de mayor jerarquia  
+
+- Mejora en la experiencia:
+  - Mayor claridad visual en el tablero  
+  
 ---
 
 ## 3. Requisitos previos
@@ -82,23 +119,21 @@ Para ejecutar este proyecto es necesario contar con:
 
 ## 6. Decisiones de diseño
 
-Decidi utilizar JavaFX junto con Scene Builder para la construcci0n de la interfaz grafica, aplicando el patron de diseño MVC (Modelo-Vista-Controlador).  
+Decidi utilizar JavaFX junto con Scene Builder para la construccion de la interfaz grafica, aplicando el patron de diseño MVC (Modelo-Vista-Controlador).  
 
 Este patron permite separar: 
 - Modelo: clases como tablero y ficha (logica del juego)
 - Vista: archivos FXML (interfaz grafica)
 - Controlador: clases como juegoController y MenuController (interaccion).
 
-- se ha profundizado en la experiencia visual y la robustez de la logica:
-
-- Identidad Visual: Se abandonaron los  colores planos por un estilo Neon para darle un aspecto mas cercano a un videojuego moderno.
-
-- Interactividad: El uso de transiciones de opacidad al iniciar el menu busca que la aplicación no se sienta estatica.
-
-- Fluidez del Juego: Las animaciones de movimiento aportan continuidad visual, evitando cambios bruscos en el tablero.
+- Identidad visual: estilo Neon para una apariencia moderna  
+- Interactividad: transiciones para evitar una interfaz estática  
+- Fluidez: animaciones que mejoran la experiencia de juego  
+- Claridad visual: diferenciación de fichas normales y damas  
 ---
 
 ## 7. Autor
 
 Nombre: [Gregoriannys Rosa Riveras]  
-Fecha: [11/4/2026]
+Fecha: [12/4/2026]
+

@@ -11,7 +11,7 @@ public class Main extends Application {
     public void start(Stage primaryStage ) throws Exception {
         ventana = primaryStage;
         mostarMenu();
-        ventana.setTitle("juego de Damas");
+        ventana.setTitle("Juego de Damas");
         ventana.show();
     }
 

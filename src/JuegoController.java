@@ -81,8 +81,24 @@ public class JuegoController {
                     else
                         pieza.setFill(Color.BLACK);
 
+                    pieza.setStroke(Color.GOLD);
+                    pieza.setStrokeWidth(1.5);
 
-                    celda.getChildren().add(pieza);
+                    // Si es dama (REINA)
+                    if (ficha.isDama()) {
+
+                        javafx.scene.shape.Circle corona = new javafx.scene.shape.Circle(SIZE * 0.18);
+                        corona.setFill(Color.GOLD);
+
+                        // Para el efecto brillo
+                        pieza.setStrokeWidth(3);
+                        pieza.setStroke(Color.GOLD);
+
+                        celda.getChildren().addAll(pieza, corona);
+
+                    }else{
+
+                    celda.getChildren().add(pieza);}
 
                 }
 
@@ -133,35 +149,34 @@ public class JuegoController {
 
     private void animarMovimiento(int filaOrigen, int colOrigen, int filaDestino, int colDestino) {
 
-    
-    StackPane celdaOrigen = null;
+        StackPane celdaOrigen = null;
 
-    for (javafx.scene.Node node : gridTablero.getChildren()) {
-        if (GridPane.getRowIndex(node) == filaOrigen &&
-            GridPane.getColumnIndex(node) == colOrigen) {
-            celdaOrigen = (StackPane) node;
-            break;
+        for (javafx.scene.Node node : gridTablero.getChildren()) {
+            if (GridPane.getRowIndex(node) == filaOrigen &&
+                    GridPane.getColumnIndex(node) == colOrigen) {
+                celdaOrigen = (StackPane) node;
+                break;
+            }
         }
+
+        if (celdaOrigen == null || celdaOrigen.getChildren().size() < 2) {
+            actualizarUI();
+            return;
+        }
+
+        javafx.scene.Node ficha = celdaOrigen.getChildren().get(1);
+
+        TranslateTransition tt = new TranslateTransition(Duration.millis(250), ficha);
+
+        tt.setByX((colDestino - colOrigen) * SIZE);
+        tt.setByY((filaDestino - filaOrigen) * SIZE);
+
+        tt.setOnFinished(e -> {
+            actualizarUI();
+        });
+
+        tt.play();
     }
-
-    if (celdaOrigen == null || celdaOrigen.getChildren().size() < 2) {
-        actualizarUI();
-        return;
-    }
-
-    javafx.scene.Node ficha = celdaOrigen.getChildren().get(1);
-
-    TranslateTransition tt = new TranslateTransition(Duration.millis(250), ficha);
-
-    tt.setByX((colDestino - colOrigen) * SIZE);
-    tt.setByY((filaDestino - filaOrigen) * SIZE);
-
-    tt.setOnFinished(e -> {
-        actualizarUI(); 
-    });
-
-    tt.play();
-}
 
     @FXML
     private void reiniciarJuego() {

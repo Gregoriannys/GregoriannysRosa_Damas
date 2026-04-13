@@ -8,12 +8,12 @@ public class Ficha {
     }
 
     private ColorFicha color;
-    private boolean dama;
+    private boolean esDama;
 
 
     public Ficha(ColorFicha color){
         this.color = color;
-        this.dama = false;
+        this.esDama = false;
 
     }
 
@@ -22,11 +22,11 @@ public class Ficha {
     }
 
     public boolean isDama(){
-        return dama;
+        return esDama;
     }
 
     public void setDama(boolean dama){
-        this.dama = dama;
+        this.esDama = dama;
     }
 
     
